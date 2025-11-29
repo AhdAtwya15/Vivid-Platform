@@ -1,0 +1,20 @@
+name: Code Review by CodeRabbit
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run CodeRabbit Review
+        uses: coderabbitai/ai-pr-reviewer@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          max_files: 50
+          review_depth: deep
