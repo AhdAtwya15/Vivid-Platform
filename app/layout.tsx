@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {  Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider"
+import { ConvexClientProvider } from "./ConvexClientProvider";
+import {ClerkProvider} from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
+import Navbar from "@/components/utility/navbar";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
   subsets: ["latin"],
 });
 
@@ -23,12 +24,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="en" suppressHydrationWarning>
+
+       <body
+        className={`${inter.className} antialiased`}
+        >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ClerkProvider
+            appearance={{
+        theme: dark,
+      }}>
+              <ConvexClientProvider>
+                <Navbar/>
+                <ModeToggle />
+                <main className=" bg-white dark:bg-black min-h-screen text-gray-800 dark:text-White overflow-x-hidden">
+                  {children}
+                </main>
+              </ConvexClientProvider>
+            </ClerkProvider>
+          </ThemeProvider>
+        </body>
+     
     </html>
   );
 }
