@@ -1,5 +1,4 @@
 "use client"
-//nav
 import { useStoreUserHook } from "@/hooks/useStoreUserHook"
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
 import { Authenticated, Unauthenticated } from "convex/react"
@@ -9,17 +8,25 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Button } from "../ui/button"
 import { LayoutDashboard } from "lucide-react"
+import { ModeToggle } from "@/components/ui/mode-toggle";
+
 
 const Navbar = () => {
   const {isLoading,isAuthenticated}=useStoreUserHook()
   const path=usePathname()
+  
+  if(path!=="/" && path !=="/feed" && path.split("/").length>=2)
+    return null;
+
+  const isModeVisible = path !== "/" && path !== "/feed" && path.split("/").length >= 2
+  if (isModeVisible) return null;
 
   return (
-    <header className="fixed top-5 px-5 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-3xl">
-        <div className="flex justify-between items-center gap-2 backdrop-blur-xl bg-[#e8e8e8] dark:bg-white/30 rounded-full py-3 px-4 sm:px-6 md:px-8 ">
+    <header className="fixed top-3.5 px-5 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-3xl">
+        <div className="flex justify-between items-center gap-2 backdrop-blur-xl bg-[#e8e8e875] dark:bg-white/20 rounded-full py-3 px-4 sm:px-6 md:px-8 ">
         <Link href={isAuthenticated?"/feed":"/"} className="shrink-0">
         <Image
-          src="/vividLogo.png"
+          src="https://ik.imagekit.io/7xylxjvvl/vivid/vividLogo.png"
           alt="Vivid logo"
           width={100}
           height={40}
@@ -27,14 +34,19 @@ const Navbar = () => {
         />
         </Link>
 
+      
+
    { path==="/" &&
    <div className="hidden lg:flex flex-1 justify-center space-x-4">
     <Link href="#features" className="font-medium hover:text-[#335833] dark:hover:text-[#0f330e]  transition-all duration-300 cursor-pointer">
       Features
     </Link>
-    <Link href="testimonials" className="font-medium hover:text-[#335833] dark:hover:text-[#0f330e]  transition-all duration-300 cursor-pointer">
+    <Link href="#testimonials" className="font-medium hover:text-[#335833] dark:hover:text-[#0f330e]  transition-all duration-300 cursor-pointer">
       Testimonials
     </Link>
+    <div>
+    
+      </div>
 
     </div>
 
@@ -43,6 +55,10 @@ const Navbar = () => {
    
 
     <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+      <div>
+        <ModeToggle />
+
+      </div>
       <Authenticated>
         <Link href={"/dashboard"}>
         <Button variant={"outline"} size={"sm"} className="hidden sm:flex justify-center items-center">
@@ -75,7 +91,7 @@ const Navbar = () => {
     {
       isLoading&&
       <div className="fixed bottom-0 left-0 w-full z-40 flex justify-center">
-        <BarLoader width={"90%"} color="#0f330e" />
+        <BarLoader width={"90%"} color="#007A55" />
       </div>
     }
 

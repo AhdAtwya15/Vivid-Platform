@@ -41,6 +41,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
 }
 
 :root {
@@ -120,3 +121,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.gradient-text-primary {
+  @apply bg-linear-to-r from-emerald-100 via-emerald-300 to-emerald-500 bg-clip-text text-transparent;
+}
+
+/* 
+.gradient-text-primary {
+  @apply bg-gradient-to-r from-white via-teal-200 to-emerald-300 bg-clip-text text-transparent;
+} */
+
+/* 
+.gradient-text-primary {
+  @apply bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent;
+} */
+
+.card-glass {
+    @apply bg-white dark:bg-emerald-950 border-gray-100 hover:border-gray-300 dark:border-emerald-900/50  dark:hover:border-emerald-600/50 hover:shadow-gray-200 dark:hover:shadow-emerald-900;
+  }

@@ -40,7 +40,7 @@ export default defineSchema({
 
   comments: defineTable({
     postId: v.id("posts"),
-    authorId: v.optional(v.id("users")), 
+    authorId:  v.id("users"), 
     authorName: v.string(),
     authorEmail: v.optional(v.string()), 
     content: v.string(),

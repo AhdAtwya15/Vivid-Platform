@@ -6,7 +6,9 @@ import { ConvexClientProvider } from "./ConvexClientProvider";
 import {ClerkProvider} from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
 import Navbar from "@/components/utility/navbar";
-import { ModeToggle } from "@/components/ui/mode-toggle";
+
+import { Toaster } from "sonner";
+
 
 
 const inter = Inter({
@@ -40,8 +42,10 @@ export default function RootLayout({
         theme: dark,
       }}>
               <ConvexClientProvider>
+             
                 <Navbar/>
-                <ModeToggle />
+                <Toaster  richColors/>
+                
                 <main className=" bg-white dark:bg-black min-h-screen text-gray-800 dark:text-White overflow-x-hidden">
                   {children}
                 </main>
