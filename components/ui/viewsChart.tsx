@@ -75,9 +75,9 @@ const ViewsChart = ({ data, isLoading, title = "Views Analytics" }: DailyViewsCh
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
         <h3 className="text-lg font-semibold text-emerald-700 dark:text-white">{title}</h3>
-        <div className="flex gap-4 text-sm text-gray-500 dark:text-slate-300">
+        <div className="flex flex-col sm:flex-row gap-4 text-sm text-gray-500 dark:text-slate-300">
           <span >Total : <span className="font-medium text-emerald-600 dark:text-emerald-70">{totalViews}</span></span>
           <span >Avg : <span className="font-medium text-emerald-600 dark:text-emerald-70">{Math.round(averageViews)}</span></span>
           <span >Range : <span className="font-medium text-emerald-600 dark:text-emerald-70">{dateRange}</span></span>

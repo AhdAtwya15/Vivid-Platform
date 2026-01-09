@@ -4,7 +4,7 @@ import { FileText, LayoutDashboard, Menu, PenTool, Settings, Users, X } from "lu
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ReactNode, useState } from "react"
+import { ReactNode, useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,7 +23,21 @@ const DashboardLayout = ({children}:IProps) => {
   const [isOpen,setIsOpen]=useState<boolean>(false)
   const pathname=usePathname()
   const{data:darftingPost}=useConvexQuery(api.posts.getUserDraft)
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
+  // Close sidebar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isOpen && sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const sidebarItems:ISideBar[] = [
   {
@@ -55,6 +69,7 @@ const toogleSideBar=()=>{
     <div className="min-h-screen text-gray-700 dark:text-white dark:bg-linear-to-br from-emerald-950/50 via-emerald-900/50 to-black/10">
 
       <aside
+      ref={sidebarRef}
       className={cn(
         "fixed top-0 left-0 h-full w-64 bg-linear-to-br from-gray-200/50 to-gray-100/50 dark:bg-linear-to-br dark:from-emerald-950/10 dark:to-emerald-900/50 backdrop-blur-sm border-r border-gray-300 dark:border-gray-600  z-50 transition-all duration-300 lg:translate-x-0 ",
         isOpen ? "translate-x-0":"-translate-x-full"

@@ -207,7 +207,7 @@ const Dashboard = () => {
       <Link
       href={`/dashboard/posts/edit/${post._id}`}
       key={post._id}
-      className="py-4 px-5 flex justify-between items-center bg-gray-100 hover:bg-gray-200  dark:bg-emerald-900/40 dark:hover:bg-emerald-900/20 rounded-xl transition-all duration-300"
+      className="py-4 px-5 flex flex-col gap-3 sm:flex-row justify-between sm:items-center bg-gray-100 hover:bg-gray-200  dark:bg-emerald-900/40 dark:hover:bg-emerald-900/20 rounded-xl transition-all duration-300"
       >
         <div className="flex flex-col gap-2">
           <h3 className="font-medium">{post.title}</h3>
@@ -232,7 +232,7 @@ const Dashboard = () => {
               {isScheduled ? "scheduled" : post.status}
             </Badge>
 
-            <span className=" text-sm text-slate-500 dark:text-slate-400">
+            <span className=" text-xs sm:text-sm text-slate-500 dark:text-slate-400">
               {isScheduled
                 ? `Scheduled for ${new Date(
                     post.scheduledFor!

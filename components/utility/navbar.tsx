@@ -61,7 +61,7 @@ const Navbar = () => {
       </div>
       <Authenticated>
         <Link href={"/dashboard"}>
-        <Button variant={"outline"} size={"sm"} className="hidden sm:flex justify-center items-center">
+        <Button variant={"outline"} size={"sm"} className=" sm:flex justify-center items-center">
          <LayoutDashboard className="h-4 w-4"/>
          <span className="hidden md:inline">Dashboard</span>         
         </Button>
