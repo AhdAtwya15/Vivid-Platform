@@ -179,6 +179,7 @@ const PostCard = ({post, showAuthor=false, showOptions=false, onEdit, className=
                 {
                     showAuthor&&post.author&&(
                         <div className="flex items-center gap-3">
+                           <Link href={`/${post.author.username}`}>
                             <div className="relative w-8 h-8">
                                 {
                                     post.author.imageUrl ? (
@@ -197,6 +198,7 @@ const PostCard = ({post, showAuthor=false, showOptions=false, onEdit, className=
                                 }
                             </div>    
 
+                           </Link>
                             <div>
                                 <p className="text-sm font-medium">
                                     {post.author.name}
