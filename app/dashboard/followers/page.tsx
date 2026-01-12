@@ -78,7 +78,7 @@ const FollowersPage = () => {
                   </TabsTrigger>
 
                 </TabsList>
-                <TabsContent value="followers" className="mt-5">
+                <TabsContent value="followers" className="mt-5 space-y-3">
                   {
                     filteredFollowers.map((user) => (
                       <UserCard key={user._id} user={user} variant="follower" onToggleFollow={handleFollowToggle} />
@@ -86,7 +86,7 @@ const FollowersPage = () => {
                   }
 
                 </TabsContent>
-                <TabsContent value="following" className="mt-5">
+                <TabsContent value="following" className="mt-5 space-y-3">
                   {
                     filteredFollowing.map((user) => (
                       <UserCard key={user._id} user={user} variant="following" onToggleFollow={handleFollowToggle} />
